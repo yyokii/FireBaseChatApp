@@ -8,6 +8,6 @@ target 'FireBaseChatApp' do
   # Pods for FireBaseChatApp
   pod 'Firebase/Core'
   pod 'Firebase/Database'
-
+  pod 'MessageKit','>=1.0.0-beta.1'
 
 end

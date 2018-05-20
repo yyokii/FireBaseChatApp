@@ -23,6 +23,7 @@ PODS:
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - leveldb-library (1.20)
+  - MessageKit (1.0.0-beta.1)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
@@ -32,6 +33,7 @@ PODS:
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Database
+  - MessageKit (>= 1.0.0-beta.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -42,6 +44,7 @@ SPEC REPOS:
     - FirebaseInstanceID
     - GoogleToolboxForMac
     - leveldb-library
+    - MessageKit
     - nanopb
 
 SPEC CHECKSUMS:
@@ -52,8 +55,9 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 83e0040351565df711a5db3d8ebe5ea21aca998a
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
+  MessageKit: 6f1313d60e480e4b09641582c65f3e36825a5bf4
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
 
-PODFILE CHECKSUM: f5259462efb6db8c087b3c43ed8e9c5a46a53dea
+PODFILE CHECKSUM: e0c2311a356ead8afcf16271fd427aa4a94af9fe
 
 COCOAPODS: 1.5.2

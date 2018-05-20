@@ -13,6 +13,7 @@
 		B604BA1A20B054EB0042EFF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B604BA1920B054EB0042EFF9 /* Assets.xcassets */; };
 		B604BA1D20B054EB0042EFF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B604BA1B20B054EB0042EFF9 /* LaunchScreen.storyboard */; };
 		B604BA2520B057610042EFF9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B604BA2420B057610042EFF9 /* GoogleService-Info.plist */; };
+		B604BA2720B08B580042EFF9 /* MessageObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = B604BA2620B08B580042EFF9 /* MessageObj.swift */; };
 		D6EC490862CDA840FDA60D16 /* Pods_FireBaseChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B71344A12D699D85C41E4235 /* Pods_FireBaseChatApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		B604BA1C20B054EB0042EFF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B604BA1E20B054EB0042EFF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B604BA2420B057610042EFF9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B604BA2620B08B580042EFF9 /* MessageObj.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageObj.swift; sourceTree = "<group>"; };
 		B71344A12D699D85C41E4235 /* Pods_FireBaseChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FireBaseChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 				B604BA2420B057610042EFF9 /* GoogleService-Info.plist */,
 				B604BA1B20B054EB0042EFF9 /* LaunchScreen.storyboard */,
 				B604BA1E20B054EB0042EFF9 /* Info.plist */,
+				B604BA2620B08B580042EFF9 /* MessageObj.swift */,
 			);
 			path = FireBaseChatApp;
 			sourceTree = "<group>";
@@ -170,12 +173,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FireBaseChatApp/Pods-FireBaseChatApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/MessageKit/MessageKit.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MessageKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -211,6 +216,7 @@
 			files = (
 				B604BA1520B054EB0042EFF9 /* ViewController.swift in Sources */,
 				B604BA1320B054EB0042EFF9 /* AppDelegate.swift in Sources */,
+				B604BA2720B08B580042EFF9 /* MessageObj.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
