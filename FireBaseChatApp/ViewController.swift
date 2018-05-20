@@ -35,8 +35,10 @@ class ViewController: MessagesViewController {
         messagesCollectionView.messagesDisplayDelegate = self
 //        messagesCollectionView.messageCellDelegate = self
         
-        // あとでもいいかな
-        // messageInputBar.delegate = self
+        messagesCollectionView.keyboardDismissMode = .interactive
+        
+        messageInputBar.delegate = self
+        defaultBarStyle()
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,6 +58,15 @@ class ViewController: MessagesViewController {
             }
             messageList.append(message)
         }
+    }
+    
+    // テキスト入力用のバースタイルを設定
+    func defaultBarStyle() {
+        let newMessageInputBar = MessageInputBar()
+        newMessageInputBar.sendButton.tintColor = UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1)
+        newMessageInputBar.delegate = self
+        messageInputBar = newMessageInputBar
+        reloadInputViews()
     }
 }
 
@@ -140,6 +151,23 @@ extension ViewController: MessagesLayoutDelegate {
     // メッセージの下部にくるテキストのビューサイズ。
     func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return 16
+    }
+    
+}
+
+// メッセージ入力バーの設定
+extension ViewController: MessageInputBarDelegate {
+    
+    func messageInputBar(_ inputBar: MessageInputBar, didPressSendButtonWith text: String) {
+        
+        // テキストを送信する
+        let message =  MessageObj(text: text, sender: currentSender(), messageId: UUID().uuidString, date: Date())
+        messageList.append(message)
+        messagesCollectionView.insertSections([messageList.count - 1])
+        
+        inputBar.inputTextView.text = String()
+        messagesCollectionView.scrollToBottom()
+        inputBar.inputTextView.resignFirstResponder()
     }
     
 }

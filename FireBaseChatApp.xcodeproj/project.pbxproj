@@ -84,12 +84,12 @@
 			children = (
 				B604BA1220B054EB0042EFF9 /* AppDelegate.swift */,
 				B604BA1420B054EB0042EFF9 /* ViewController.swift */,
+				B604BA2620B08B580042EFF9 /* MessageObj.swift */,
 				B604BA1620B054EB0042EFF9 /* Main.storyboard */,
 				B604BA1920B054EB0042EFF9 /* Assets.xcassets */,
 				B604BA2420B057610042EFF9 /* GoogleService-Info.plist */,
 				B604BA1B20B054EB0042EFF9 /* LaunchScreen.storyboard */,
 				B604BA1E20B054EB0042EFF9 /* Info.plist */,
-				B604BA2620B08B580042EFF9 /* MessageObj.swift */,
 			);
 			path = FireBaseChatApp;
 			sourceTree = "<group>";
