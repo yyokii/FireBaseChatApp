@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xgR-3a-dWm">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FireBaseChatApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -19,6 +23,65 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="DXU-4E-din">
+            <objects>
+                <viewController id="xgR-3a-dWm" customClass="LoginViewController" customModule="FireBaseChatApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mpR-vJ-JrQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kS6-cC-ojP">
+                                <rect key="frame" x="158" y="120" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="dYC-RZ-dgC"/>
+                                    <constraint firstAttribute="width" constant="60" id="ejo-oh-OON"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HgS-4Y-SsA">
+                                <rect key="frame" x="30" y="200" width="315" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7N-xh-C9j">
+                                <rect key="frame" x="122.5" y="380" width="130" height="60"/>
+                                <color key="backgroundColor" red="0.01176470588" green="0.14117647059999999" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="PBZ-Vv-F29"/>
+                                    <constraint firstAttribute="width" constant="130" id="Zkw-jL-HID"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" red="0.97255000000000003" green="0.97255000000000003" blue="0.94901999999999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="LoginTapped:" destination="xgR-3a-dWm" eventType="touchUpInside" id="3or-fX-797"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="HgS-4Y-SsA" firstAttribute="leading" secondItem="gbb-JT-Xd1" secondAttribute="leading" constant="30" id="9Ji-QQ-eOm"/>
+                            <constraint firstItem="A7N-xh-C9j" firstAttribute="top" secondItem="HgS-4Y-SsA" secondAttribute="bottom" constant="150" id="ENf-S5-wjv"/>
+                            <constraint firstItem="kS6-cC-ojP" firstAttribute="centerX" secondItem="mpR-vJ-JrQ" secondAttribute="centerX" id="PQY-Vx-gJo"/>
+                            <constraint firstItem="kS6-cC-ojP" firstAttribute="top" secondItem="gbb-JT-Xd1" secondAttribute="top" constant="100" id="QTu-4h-wv3"/>
+                            <constraint firstItem="HgS-4Y-SsA" firstAttribute="top" secondItem="kS6-cC-ojP" secondAttribute="bottom" constant="20" id="VGg-s2-zWz"/>
+                            <constraint firstItem="A7N-xh-C9j" firstAttribute="centerX" secondItem="mpR-vJ-JrQ" secondAttribute="centerX" id="jqV-DN-RGL"/>
+                            <constraint firstItem="gbb-JT-Xd1" firstAttribute="trailing" secondItem="HgS-4Y-SsA" secondAttribute="trailing" constant="30" id="ySY-Md-xEV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gbb-JT-Xd1"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameTextField" destination="HgS-4Y-SsA" id="nKX-Od-fbm"/>
+                        <outlet property="userImageView" destination="kS6-cC-ojP" id="usd-0s-1SA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L8n-H3-pij" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="126" y="-1209"/>
         </scene>
     </scenes>
 </document>
