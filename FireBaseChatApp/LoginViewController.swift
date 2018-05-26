@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseStorage
 
 class LoginViewController: UIViewController {
 
@@ -21,6 +22,11 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         applyImagePicker()
+        
+        if ((UserDefaults.standard.object(forKey: UID)) != nil){
+            // ユーザー一覧画面に遷移
+            self.performSegue(withIdentifier: "users", sender: nil)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,7 +49,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func LoginTapped(_ sender: Any) {
-        guard nameTextField.text != "" , nameTextField.text != "" else {
+        guard nameTextField.text != "" , nameTextField.text != "", userImageView.image != nil else {
             return
         }
         
@@ -51,48 +57,50 @@ class LoginViewController: UIViewController {
     }
     
     func loginAnonymous(name: String){
-        //匿名アカウントを認証する
+        // 匿名アカウントを認証する
         Auth.auth().signInAnonymously() { [weak self] (result, error) in
             if error != nil {
-                //エラー時の処理
+                // エラー時の処理
                 return
             }
-            //成功時の処理、ユーザー情報追加
+            // ユーザー情報をDBに追加
             let userData: Dictionary<String,Any> = ["name": name]
             self?.completeSignIn(id: (result?.user.uid)!, userData: userData)
         }
     }
     
     func completeSignIn (id: String, userData: Dictionary<String,Any>){
+        // FIXME: あー weak selfいるのか微妙だ クロージャーの中でself使うときはweakとかやけど普通のメソッド内ではなにもつけないのなんで？？
         DataService.ds.REF_USER.child(id).updateChildValues(userData) { [weak self] (error, ref) in
-            
             UserDefaults.standard.set(id, forKey: UID)
-            // 画面遷移
-            //self?.performSegue(withIdentifier: "goToFeed", sender: nil)
+            self?.uploadImage(image: (self?.userImageView.image)!, completion: {
+                // ユーザー一覧画面に遷移
+                self?.performSegue(withIdentifier: "users", sender: nil)
+            })
         }
     }
     
     /// 画像をストレージにアップロードする
-//    ///
-//    /// - Parameters:
-//    ///   - image: 保存する画像
-//    static func uploadImage(image: UIImage, completion: @escaping (() -> Void)){
-//        if let imgData = UIImageJPEGRepresentation(image, 0.5) {
-//            let imgUid = KeychainWrapper.standard.string(forKey: KEY_UID)!
-//            let matadata = FIRStorageMetadata()
-//            matadata.contentType = "image/jpeg"
-//
-//            // 画像をfirebaseストレージに追加
-//            DataService.ds.REF_USER_IMAGES.child(imgUid).put(imgData, metadata: matadata) { (metadata, error) in
-//                if error != nil {
-//                    print("Error: Firebasee storageへの画像アップロード失敗")
-//                } else {
-//                    print("OK:　Firebase storageへの画像アップロード成功")
-//                    completion()
-//                }
-//            }
-//        }
-//    }
+    ///
+    /// - Parameters:
+    ///   - image: 保存する画像
+    func uploadImage(image: UIImage, completion: @escaping (() -> Void)){
+        if let imgData = UIImageJPEGRepresentation(image, 0.5) {
+            let imgUid = UserDefaults.standard.string(forKey: UID)
+            let matadata = StorageMetadata()
+            matadata.contentType = "image/jpeg"
+
+            // 画像をfirebaseストレージに追加
+            DataService.ds.REF_USER_IMAGES.child(imgUid!).putData(imgData, metadata: matadata) { (metadata, error) in
+                if error != nil {
+                    print("Error: Firebasee storage, \(String(describing: error?.localizedDescription))")
+                } else {
+                    print("OK:　Firebase storageへの画像アップロード成功")
+                    completion()
+                }
+            }
+        }
+    }
 }
 
 extension LoginViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate{

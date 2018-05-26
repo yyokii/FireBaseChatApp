@@ -9,6 +9,7 @@ target 'FireBaseChatApp' do
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
   pod 'MessageKit','>=1.0.0-beta.1'
 
 end
