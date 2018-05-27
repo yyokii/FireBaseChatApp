@@ -11,6 +11,9 @@ import UIKit
 class UserCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var userImage: UIImageView!
-    
     @IBOutlet weak var nameLabel: UILabel!
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 }

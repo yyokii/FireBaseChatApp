@@ -21,6 +21,8 @@ class DataService {
     //DB referrence
     private var _REF_BASE = DB_BASE
     private var _REF_USER = DB_BASE.child(USER)
+    private var _REF_TALK_ROOM = DB_BASE.child(TALK_ROOM)
+
     private var _REF_USER_IMAGES = STORAGE_BASE.child(USER)
     //アイコンupload用
     //private var _REF_USER_IMAGES = STORAGE_BASE.child(USER_ICON_PICS)
@@ -33,6 +35,11 @@ class DataService {
     var REF_USER: DatabaseReference {
         
         return _REF_USER
+    }
+    
+    var REF_TALK_ROOM: DatabaseReference {
+        
+        return _REF_TALK_ROOM
     }
     
     var REF_USER_IMAGES: StorageReference {

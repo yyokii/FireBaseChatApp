@@ -11,5 +11,6 @@ import Foundation
 let UID = "uid"
 
 // firebase Key
-let USER = "user"
 let MESSAGE = "message"
+let TALK_ROOM = "talkRoom"
+let USER = "user"

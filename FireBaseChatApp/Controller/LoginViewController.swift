@@ -22,10 +22,12 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         applyImagePicker()
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         if ((UserDefaults.standard.object(forKey: UID)) != nil){
             // ユーザー一覧画面に遷移
-            self.performSegue(withIdentifier: "users", sender: nil)
+            performSegue(withIdentifier: "users", sender: nil)
         }
     }
 

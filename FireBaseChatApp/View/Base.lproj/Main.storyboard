@@ -84,12 +84,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L8n-H3-pij" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="126" y="-1209"/>
+            <point key="canvasLocation" x="214" y="-1210"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--User Collection View Controller-->
         <scene sceneID="xz2-L6-Vn1">
             <objects>
-                <collectionViewController id="6kw-WR-098" sceneMemberID="viewController">
+                <collectionViewController id="6kw-WR-098" customClass="UserCollectionViewController" customModule="FireBaseChatApp" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="AOo-ob-wrX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,7 +101,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="PF9-YA-kxi" customClass="UserCollectionViewCell" customModule="FireBaseChatApp" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="userCell" id="PF9-YA-kxi" customClass="UserCollectionViewCell" customModule="FireBaseChatApp" customModuleProvider="target" colorLabel="IBBuiltInLabel-Purple">
                                 <rect key="frame" x="0.0" y="0.0" width="108" height="122"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -145,7 +145,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLc-bd-gsL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="880.79999999999995" y="-1210.344827586207"/>
+            <point key="canvasLocation" x="1010" y="-1210"/>
         </scene>
     </scenes>
 </document>
