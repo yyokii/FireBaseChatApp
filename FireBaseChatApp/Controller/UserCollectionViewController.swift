@@ -14,6 +14,7 @@ private let reuseIdentifier = "userCell"
 class UserCollectionViewController: UICollectionViewController {
 
     var users = [UserObj]()
+    // FIXME: このユーザーIDの取得は散乱しているので、まとめてもいいかも
     let currentUserID = UserDefaults.standard.string(forKey: UID)!
     
     override func viewDidLoad() {
@@ -54,12 +55,23 @@ class UserCollectionViewController: UICollectionViewController {
         let memberData = [currentUserID : true, talkUserID: true]
         
         checkTalkingUser(talkUserID: talkUserID) {
-            DataService.ds.REF_TALK_ROOM.childByAutoId().updateChildValues(memberData) {(error, ref) in
+            DataService.ds.REF_TALK_ROOM.childByAutoId().updateChildValues(memberData) { [weak self] (error, ref) in
                 print("作成されたroomのID：\(ref.key)")
                 
-                // ユーザーの talkRoom を作成
-                let talkRoomData = [ref.key:talkUserID]
-                DataService.ds.REF_USER.child(self.currentUserID).child(TALK_ROOM).updateChildValues(talkRoomData) { (error, ref) in
+                guard let currentUserID = self?.currentUserID else {
+                    // FIXME: serIDの取得方法変えたこの処理消した方がいいかも、return場合に作成されたroom不要になる
+                    return
+                }
+                
+                // ユーザーのtalkRoomデータを作成
+                let myRoomData = [ref.key:talkUserID]
+                // トーク相手のtalkRoomデータを作成
+                let talkUserData = [ref.key:currentUserID]
+                
+                let childUpdates = ["/\(USER)/\(currentUserID)/\(TALK_ROOM)": myRoomData,
+                                    "/\(USER)/\(talkUserID)/\(TALK_ROOM)/": talkUserData]
+                
+                DataService.ds.REF_BASE.updateChildValues(childUpdates) { (error, ref) in
                     // トーク画面に遷移
                 }
             }
@@ -69,31 +81,27 @@ class UserCollectionViewController: UICollectionViewController {
     func checkTalkingUser(talkUserID: String, completion: @escaping (() -> Void)){
         DataService.ds.REF_USER.child(currentUserID).child(TALK_ROOM).observeSingleEvent(of: .value) {(snapshot) in
             if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-                for snap in snapshot {
-                    print("現在トーク中のユーザーのid：\(String(describing: snap.value))")
-                    let talkingUserID = snap.value as! String
-                    if talkingUserID == talkUserID {
-                        print("すでにトークルームが存在しています")
-                        return
-                    }else {
-                        // ユーザーとトークするためのDB情報を作成する
-                        completion()
+                
+                if snapshot.count == 0 {
+                    print("初めてのトーク")
+                    completion()
+                }else {
+                    for snap in snapshot {
+                        print("現在トーク中のユーザーのid：\(String(describing: snap.value))")
+                        let talkingUserID = snap.value as! String
+                        if talkingUserID == talkUserID {
+                            print("すでにトークルームが存在しています")
+                            return
+                        }else {
+                            // ユーザーとトークするためのDB情報を作成する
+                            completion()
+                        }
                     }
                 }
             }
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -114,40 +122,19 @@ class UserCollectionViewController: UICollectionViewController {
     // MARK: UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        Alert.presentTwoBtnAlert(vc: self, title: "トークしましょう！", message: "\(users[indexPath.row].name ?? "このユーザー") とトークします", positiveTitle: "OK", negativeTitle: "CACEL") { [weak self] in
-            self?.talkAction(talkUserID: (self?.users[indexPath.row].uid)!, completion: {
-                print("tes")
-            })
+        
+        guard let selectedUserID = users[indexPath.row].uid else{
+            return
+        }
+        
+        if selectedUserID == currentUserID  {
+            Alert.presentOneBtnAlert(vc: self, title: "おっと！\nその素敵な人はあなたです :)", message: "", positiveTitle: "CLOSE", positiveAction: {})
+        }else {
+            Alert.presentTwoBtnAlert(vc: self, title: "トークしましょう！", message: "\(users[indexPath.row].name ?? "このユーザー") とトークします", positiveTitle: "OK", negativeTitle: "CACEL") { [weak self] in
+                self?.talkAction(talkUserID: selectedUserID, completion: {
+                    print("tes")
+                })
+            }
         }
     }
-    
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }

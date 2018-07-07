@@ -9,6 +9,21 @@
 import UIKit
 
 class Alert {
+    
+    // アラートを表示する汎用メソッド（ボタン1個）
+    public static func presentOneBtnAlert(vc: UIViewController, title: String, message: String, positiveTitle: String, positiveAction: @escaping () -> Void) {
+        
+        let alert: UIAlertController = UIAlertController(title: title, message: message, preferredStyle:  UIAlertControllerStyle.alert)
+        
+        let positiveAction: UIAlertAction = UIAlertAction(title: positiveTitle, style: UIAlertActionStyle.default, handler:{
+            (action: UIAlertAction!) -> Void in
+            positiveAction()
+        })
+        alert.addAction(positiveAction)
+        
+        vc.present(alert, animated: true, completion: nil)
+    }
+    
     // アラートを表示するメソッド（ボタン2個）
     public static func presentTwoBtnAlert(vc: UIViewController, title: String, message: String, positiveTitle: String, negativeTitle: String, positiveAction: @escaping () -> Void) {
         
